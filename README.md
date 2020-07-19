@@ -7,6 +7,6 @@
 ## Erreur 
 
 - La base de donner de fonctionne pas. Problème de mot de passe ou de configuration. 
-(commande : php bin/console make:migration)
+(commande : php bin/console make:migration ou dans le fichier .env)
 
 - Je n'arrive pas à lancer le front sur localhost:8080
