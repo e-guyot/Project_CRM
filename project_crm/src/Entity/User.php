@@ -42,6 +42,40 @@ class User
      */
     private $tag;
 
+    public function __construct($firstname, $lastname, $email, $phoneNumber = NULL, $tag) {
+		$this->firstname = $firstname;
+		$this->lastname = $lastname;
+		$this->email = $email;
+        $this->phoneNumber = $phoneNumber;
+        $this->tag = $tag;
+	}
+
+    public function isValid() {
+		return $this->checkName() && $this->checkEmail() && $this->checkphoneNumber() && $this->checkTag();
+	}
+
+	private function checkName() {
+		return !empty($this->firstname) && is_string($this->firstname) && !empty($this->lastname) && is_string($this->lastname);
+	}
+
+	private function checkEmail() {
+		return !empty($this->email) && filter_var($this->email, FILTER_VALIDATE_EMAIL);
+	}
+
+	public function checkPhoneNumber() {
+		if (!empty($this->phoneNumber) && filter_var($this->phoneNumber, FILTER_SANITIZE_NUMBER_INT)){
+            return TRUE; // si c'est un num de tel
+        } else if (!empty($this->phoneNumber) && $this->phoneNumber === NULL){
+            return TRUE; //si c'est vide
+        }
+        return FALSE;
+    }
+    
+    public function checkTag()
+    {
+        return !empty($this->tag) && is_string($this->tag);
+    }
+
     public function getId(): ?int
     {
         return $this->id;
